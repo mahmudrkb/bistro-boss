@@ -1,19 +1,49 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../providers/AuthProviders";
 
 const Navbar = () => {
+  const { user, logOutUser } = useContext(AuthContext);
+  const navigate=useNavigate()
+  const handleLogout = () => {
+    logOutUser()
+    .then(()=>{
+      navigate('/')
+    
+    })
+    .catch(error=>console.log(error))
+  };
+
   const NavLink = (
     <>
       <li>
-       <Link to="/" >Home</Link>
+        <Link to="/">Home</Link>
       </li>
-     
+
       <li>
-        <Link to="/menu" >Menu</Link>
+        <Link to="/menu">Menu</Link>
       </li>
-     
+
       <li>
-        <Link to="/order/salad" >Order</Link>
+        <Link to="/order/salad">Order</Link>
+      </li>
+      <li>
+        {user? (
+          <button onClick={handleLogout}>Log Out</button>
+          
+        ) : (
+          <Link to="/login">Login</Link>
+          
+        )}
+      </li>
+
+      <li>
+        <Link to="/register">Register</Link>
+      </li>
+      <li className="flex justify-center items-center  ">
+        <img className="w-16 h-full rounded-full" src={user?.photoURL} alt="" />
+      
+       <h2>{user?.displayName}</h2>
       </li>
     </>
   );
