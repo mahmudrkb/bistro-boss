@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.bg-featured{
+    background-image: url(../src/assets/home/featured.jpg);
+    background-color: rgba(0, 0, 0, 0.699);
+    background-blend-mode: color;
+    
+
+}
