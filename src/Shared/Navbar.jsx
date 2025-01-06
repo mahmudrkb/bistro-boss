@@ -1,17 +1,19 @@
 import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProviders";
+import { FaCartArrowDown } from "react-icons/fa";
+import useCart from "../Hooks/useCart";
 
 const Navbar = () => {
   const { user, logOutUser } = useContext(AuthContext);
-  const navigate=useNavigate()
+  const navigate = useNavigate();
+  const [cart]=useCart()
   const handleLogout = () => {
     logOutUser()
-    .then(()=>{
-      navigate('/')
-    
-    })
-    .catch(error=>console.log(error))
+      .then(() => {
+        navigate("/");
+      })
+      .catch((error) => console.log(error));
   };
 
   const NavLink = (
@@ -28,28 +30,36 @@ const Navbar = () => {
         <Link to="/order/salad">Order</Link>
       </li>
       <li>
-        {user? (
+        {user ? (
           <button onClick={handleLogout}>Log Out</button>
-          
         ) : (
           <Link to="/login">Login</Link>
-          
         )}
       </li>
 
       <li>
         <Link to="/register">Register</Link>
       </li>
-      <li className="flex justify-center items-center  ">
-        <img className="w-16 h-full rounded-full" src={user?.photoURL} alt="" />
-      
-       <h2>{user?.displayName}</h2>
+      <li>
+        <Link to="/dashboard">
+          <button className="btn">
+          <FaCartArrowDown />
+            <div className="badge">+{cart.length}</div>
+          </button>
+        </Link>
+      </li>
+      <li>
+        <div className="flex justify-center items-center  ">
+          <img className="w-10 h-10 rounded-full" src={user?.photoURL} alt="" />
+
+          <h2>{user?.displayName}</h2>
+        </div>
       </li>
     </>
   );
   return (
-    <div className=" container mx-auto  ">
-      <div className="navbar fixed z-10 bg-opacity-60 bg-black text-white">
+    <div className="  ">
+      <div className="navbar fixed z-10 container mx-auto bg-opacity-60 bg-black text-white">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -78,7 +88,7 @@ const Navbar = () => {
           <a className="btn btn-ghost text-xl">daisyUI</a>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal   px-1">{NavLink}</ul>
+          <ul className="menu menu-horizontal items-center  px-1">{NavLink}</ul>
         </div>
         <div className="navbar-end">
           <a className="btn">Button</a>
