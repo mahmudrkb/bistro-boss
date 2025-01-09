@@ -3,20 +3,21 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   loadCaptchaEnginge,
   LoadCanvasTemplate,
-  
   validateCaptcha,
 } from "react-simple-captcha";
 import { AuthContext } from "../providers/AuthProviders";
 import Swal from "sweetalert2";
+
+import GoogleLogin from "../components/SocialLogin/GoogleLogin";
 
 const Login = () => {
   const { signinUser } = useContext(AuthContext);
   const [disabled, setDisabled] = useState(true);
 
   const navigate = useNavigate();
-  const location=useLocation()
+  const location = useLocation();
 
-  const from=location.state?.from?.pathname || '/'
+  const from = location.state?.from?.pathname || "/";
 
   useEffect(() => {
     loadCaptchaEnginge(4);
@@ -37,7 +38,7 @@ const Login = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        navigate(from,{replace:true})
+        navigate(from, { replace: true });
       })
       .catch((error) => console.log(error.massage));
   };
@@ -56,7 +57,7 @@ const Login = () => {
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="text-center lg:text-left">
             <h1 className="text-5xl font-bold">Login now!</h1>
-            <p className="py-6">
+            <p className="py-6 max-w-2xl">
               Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
               excepturi exercitationem quasi. In deleniti eaque aut repudiandae
               et a id nisi.
@@ -107,15 +108,22 @@ const Login = () => {
                 />
               </div>
               <div className="form-control mt-6">
-                <button disabled={disabled} className="btn btn-primary">Login</button>
+                <button disabled={disabled} className="btn btn-primary">
+                  Login
+                </button>
               </div>
             </form>
             <div className="text-center mb-5">
               <p> Don't have an account?</p>
-              <Link className="text-red-500" to="/register">
+              <Link className="text-red-500 " to="/register">
                 Register
               </Link>
+            
             </div>
+            <div className="my-5 text-center">
+            <GoogleLogin></GoogleLogin>
+            </div>
+          
           </div>
         </div>
       </div>

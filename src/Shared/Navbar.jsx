@@ -49,11 +49,13 @@ const Navbar = () => {
         </Link>
       </li>
       <li>
-        <div className="flex justify-center items-center  ">
-          <img className="w-10 h-10 rounded-full" src={user?.photoURL} alt="" />
+       {
+        user&&  <div className="flex justify-center items-center  ">
+        <img className="w-10 h-10 rounded-full" src={user?.photoURL} alt="" />
 
-          <h2>{user?.displayName}</h2>
-        </div>
+        <h2>{user?.displayName}</h2>
+      </div>
+       }
       </li>
     </>
   );

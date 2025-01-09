@@ -1,7 +1,7 @@
 import React from "react";
 import useCart from "../../Hooks/useCart";
 
-import { CiEdit } from "react-icons/ci";
+
 import { MdDelete } from "react-icons/md";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
