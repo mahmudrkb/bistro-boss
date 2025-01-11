@@ -9,6 +9,11 @@ import PrivateRoutes from "./PrivateRoutes";
 import Dashboard from "../Layout/Dashboard";
 import Cart from "../Pages/Dashboard/Cart";
 import AllUsers from "../Pages/Dashboard/AllUsers";
+import AddItems from "../Pages/Dashboard/AddItems";
+import AdminRoutes from "./AdminRoutes";
+import ManageItens from "../Pages/Dashboard/ManageItems";
+import ManageItems from "../Pages/Dashboard/ManageItems";
+import UpdateItem from "../Pages/Dashboard/UpdateItem";
 
 const router = createBrowserRouter([
   {
@@ -49,10 +54,39 @@ const router = createBrowserRouter([
         path: "/dashboard/cart",
         element: <Cart></Cart>,
       },
+      // only admin access this routes
+      {
+        path: "/dashboard/addItems",
+        element: (
+          <AdminRoutes>
+            <AddItems></AddItems>
+          </AdminRoutes>
+        ),
+      },
+      {
+        path: "/dashboard/manageItems",
+        element: (
+          <AdminRoutes>
+            <ManageItems></ManageItems>
+          </AdminRoutes>
+        ),
+      },
+      {
+        path: "/dashboard/updateItem/:id",
+        element: (
+          <AdminRoutes>
+          <UpdateItem></UpdateItem>
+          </AdminRoutes>
+        ),
+      },
       {
         path: "/dashboard/allUsers",
-        element: <AllUsers></AllUsers>
-      }
+        element: (
+          <AdminRoutes>
+            <AllUsers></AllUsers>
+          </AdminRoutes>
+        ),
+      },
     ],
   },
 ]);

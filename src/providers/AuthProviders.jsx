@@ -71,14 +71,14 @@ const AuthProviders = ({ children }) => {
         });
       } else {
         // TODO remove token (if token stored in the client side )
-        localStorage.removeItem('access-token')
+        localStorage.removeItem("access-token");
       }
       setLoading(false);
     });
     return () => {
       return unSubscribe();
     };
-  }, []);
+  }, [axiosPublic]);
   return <AuthContext.Provider value={info}>{children}</AuthContext.Provider>;
 };
 

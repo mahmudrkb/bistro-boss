@@ -15,15 +15,18 @@ import { MdMenuBook } from "react-icons/md";
 import { NavLink, Outlet } from "react-router-dom";
 import useCart from "../Hooks/useCart";
 import { IoMailSharp } from "react-icons/io5";
+import useAdmin from "../Hooks/useAdmin";
 
 const Dashboard = () => {
   const [cart] = useCart();
   // todo set admin ...
 
-  const isAdmin = true;
+  const [isAdmin] = useAdmin();
   return (
     <div className="container  mx-auto">
-      <div className="flex">
+
+
+      <div className="flex gap-10">
         <div className="bg-orange-400  h-screen">
           <ul className="menu  text-base-content min-h-full w-56 p-4">
             {isAdmin ? (
