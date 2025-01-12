@@ -14,6 +14,7 @@ import AdminRoutes from "./AdminRoutes";
 import ManageItens from "../Pages/Dashboard/ManageItems";
 import ManageItems from "../Pages/Dashboard/ManageItems";
 import UpdateItem from "../Pages/Dashboard/UpdateItem";
+import Payment from "../Pages/Dashboard/Payment";
 
 const router = createBrowserRouter([
   {
@@ -54,6 +55,14 @@ const router = createBrowserRouter([
         path: "/dashboard/cart",
         element: <Cart></Cart>,
       },
+      {
+        path: '/dashboard/payment',
+        element:<Payment></Payment>
+
+      },
+
+
+
       // only admin access this routes
       {
         path: "/dashboard/addItems",
@@ -73,11 +82,12 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/updateItem/:id",
-        element: (
+        element: 
           <AdminRoutes>
           <UpdateItem></UpdateItem>
-          </AdminRoutes>
-        ),
+          </AdminRoutes>,
+       
+      loader:({params})=>fetch(`http://localhost:5000/menu/${params.id}`)
       },
       {
         path: "/dashboard/allUsers",

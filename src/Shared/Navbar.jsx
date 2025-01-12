@@ -50,7 +50,7 @@ const Navbar = () => {
       </li>
       <li>
        {
-        user&&  <div className="flex justify-center items-center  ">
+        user &&  <div className="flex justify-center items-center  ">
         <img className="w-10 h-10 rounded-full" src={user?.photoURL} alt="" />
 
         <h2>{user?.displayName}</h2>
