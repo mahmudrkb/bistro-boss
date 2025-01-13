@@ -3,11 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProviders";
 import { FaCartArrowDown } from "react-icons/fa";
 import useCart from "../Hooks/useCart";
+import useAdmin from "../Hooks/useAdmin";
 
 const Navbar = () => {
   const { user, logOutUser } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [cart]=useCart()
+  const [isAdmin] = useAdmin();
+  const [cart] = useCart();
   const handleLogout = () => {
     logOutUser()
       .then(() => {
@@ -29,6 +31,16 @@ const Navbar = () => {
       <li>
         <Link to="/order/salad">Order</Link>
       </li>
+      {user && isAdmin && (
+        <li>
+          <Link to="/dashBoard/adminHome">Dashboard</Link>
+        </li>
+      )}
+      {user && !isAdmin && (
+        <li>
+          <Link to="/dashBoard/userHome">Dashboard</Link>
+        </li>
+      )}
       <li>
         {user ? (
           <button onClick={handleLogout}>Log Out</button>
@@ -43,19 +55,23 @@ const Navbar = () => {
       <li>
         <Link to="/dashboard">
           <button className="btn">
-          <FaCartArrowDown />
+            <FaCartArrowDown />
             <div className="badge">+{cart.length}</div>
           </button>
         </Link>
       </li>
       <li>
-       {
-        user &&  <div className="flex justify-center items-center  ">
-        <img className="w-10 h-10 rounded-full" src={user?.photoURL} alt="" />
+        {user && (
+          <div className="flex justify-center items-center  ">
+            <img
+              className="w-10 h-10 rounded-full"
+              src={user?.photoURL}
+              alt=""
+            />
 
-        <h2>{user?.displayName}</h2>
-      </div>
-       }
+            <h2>{user?.displayName}</h2>
+          </div>
+        )}
       </li>
     </>
   );

@@ -11,10 +11,12 @@ import Cart from "../Pages/Dashboard/Cart";
 import AllUsers from "../Pages/Dashboard/AllUsers";
 import AddItems from "../Pages/Dashboard/AddItems";
 import AdminRoutes from "./AdminRoutes";
-import ManageItens from "../Pages/Dashboard/ManageItems";
 import ManageItems from "../Pages/Dashboard/ManageItems";
 import UpdateItem from "../Pages/Dashboard/UpdateItem";
 import Payment from "../Pages/Dashboard/Payment";
+import PaymentsHistory from "../Pages/Dashboard/PaymentsHistory";
+import AdminHome from "../Pages/Dashboard/AdminHome";
+import UserHome from "../Pages/Dashboard/UserHome";
 
 const router = createBrowserRouter([
   {
@@ -52,18 +54,25 @@ const router = createBrowserRouter([
     ),
     children: [
       {
+        path: "/dashboard/userHome",
+        element: <UserHome></UserHome>,
+      },
+      {
         path: "/dashboard/cart",
         element: <Cart></Cart>,
       },
-      {
-        path: '/dashboard/payment',
-        element:<Payment></Payment>
 
+      {
+        path: "/dashboard/payment",
+        element: <Payment></Payment>,
+      },
+      {
+        path: "/dashboard/paymentsHistory",
+        element: <PaymentsHistory></PaymentsHistory>,
       },
 
-
-
       // only admin access this routes
+
       {
         path: "/dashboard/addItems",
         element: (
@@ -72,6 +81,15 @@ const router = createBrowserRouter([
           </AdminRoutes>
         ),
       },
+      {
+        path: "/dashboard/adminHome",
+        element: (
+          <AdminRoutes>
+            <AdminHome></AdminHome>
+          </AdminRoutes>
+        ),
+      },
+
       {
         path: "/dashboard/manageItems",
         element: (
@@ -82,12 +100,14 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/updateItem/:id",
-        element: 
+        element: (
           <AdminRoutes>
-          <UpdateItem></UpdateItem>
-          </AdminRoutes>,
-       
-      loader:({params})=>fetch(`http://localhost:5000/menu/${params.id}`)
+            <UpdateItem></UpdateItem>
+          </AdminRoutes>
+        ),
+
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/menu/${params.id}`),
       },
       {
         path: "/dashboard/allUsers",
